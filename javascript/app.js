@@ -25,6 +25,7 @@
 //setting global variables to grab the results div and the submit button
 const $results = $("#results");
 const $submit = $("#submit");
+$results.text("Use the search bar above to find your favorite TV shows!");
 
 
 //function that generates each result card upon search
@@ -59,30 +60,27 @@ function returnResults(){
 
   //sets url to the tvmaze search url and sets the query to the search box text
   let url =  "https://api.tvmaze.com/search/shows?q=" + $("#text").val(); 
-  
-  
+
   //retrieves search data based off search url
   $.get(url, (data) => {
-    
       //Clears previous results upon initiating a new search
       $results.empty();
-
-      //Alerts the user if search results returns no results
+        //Alerts the user if search results returns no results
       if(data.length === 0){
         $results.text("Sorry, we don't have that show!");
-      }
+      };
 
-              //generates result cards while looping through the collected search data
-              for (var index = 0; index < data.length; index++){
-                      generateResultCards(data[index]);
-              }
-      });
+          //generates result cards while looping through the collected search data
+          for (var index = 0; index < data.length; index++){
+              generateResultCards(data[index]);
+          };
+  });
 
-  }
+};
 
 
 //on clicking submit, it executes the returnResults function
-$("#submit").click(returnResults)
+$("#submit").click(returnResults);
 
 
 //on hitting enter after typing search, run returnResults()
